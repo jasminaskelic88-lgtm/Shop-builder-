@@ -17,10 +17,10 @@ setv(document.getElementById('compliance-summary-textarea'),D.cart_en);
 setv(document.getElementById('listing-de-translation-shopping-cart-summary-textarea'),D.cart_de);
 const ti=document.getElementById('listing-translations.0.tags-input');
 const addBtn=[...ti.closest('div').parentElement.parentElement.querySelectorAll('button')].find(b=>b.innerText.trim()==='Hinzufügen');
-for(const t of D.tags){setv(ti,t);await sleep(150);(addBtn||ti).click();if(!addBtn)ti.dispatchEvent(new KeyboardEvent('keydown',{key:'Enter',bubbles:true}));await sleep(250);}
+for(const t of D.tags){setv(ti,t);await sleep(100);(addBtn||ti).click();if(!addBtn)ti.dispatchEvent(new KeyboardEvent('keydown',{key:'Enter',bubbles:true}));await sleep(150);}
 log.push('addBtn '+!!addBtn);
 const ai=document.querySelector('input[name=whatContent][value=ai_gen]');if(ai&&!ai.checked)ai.click();log.push('ai '+(ai&&ai.checked));
 const sel=document.getElementById('shop-section-select');log.push('section '+(sel&&sel.options[sel.selectedIndex].text));
-await sleep(5000);const pb=[...document.querySelectorAll("button")].filter(b=>/^(Mit Änderungen veröffentlichen|Veröffentlichen)$/.test(b.innerText.trim())&&b.offsetParent);log.push("pub "+pb.length);pb[0].click();await sleep(4000);const m=[...document.querySelectorAll("[role=dialog] button, .wt-overlay button")].filter(b=>b.offsetParent&&/Veröffentlichen/.test(b.innerText));log.push("modal "+m.length);if(m.length)m[0].click();await sleep(6000);log.push(location.pathname);
+await sleep(5000);const pb=[...document.querySelectorAll("button")].filter(b=>/^(Mit Änderungen veröffentlichen|Veröffentlichen)$/.test(b.innerText.trim())&&b.offsetParent);log.push("pub "+pb.length);pb[0].click();await sleep(4000);const m=[...document.querySelectorAll("[role=dialog] button, .wt-overlay button")].filter(b=>b.offsetParent&&/Veröffentlichen/.test(b.innerText));log.push("modal "+m.length);if(m.length)m[0].click();await sleep(2500);log.push(location.pathname);
 return log;
 })
